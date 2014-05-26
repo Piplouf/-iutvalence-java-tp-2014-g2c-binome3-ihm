@@ -2,16 +2,16 @@ package tp.java.puissance4.binome4;
 
 /**
  * Class Plateau
- *
+ * 
  * @author massonsilvestre
  * @version V3.2
  */
 
 public class Plateau {
 	/** Nombre de colonnes. */
-	private static final int NOMBRE_COLONNES = 7;
+	public static final int NOMBRE_COLONNES = 7;
 	/** Nombre de lignes. */
-	private static final int NOMBRE_LIGNES = 6;
+	public static final int NOMBRE_LIGNES = 6;
 	/** TODO. */
 	private final int tailleLigne;
 
@@ -53,22 +53,17 @@ public class Plateau {
 
 	}
 
-	public boolean placerPion(int colonne, Pion joueur) {
-		if ((colonne < 0) || (colonne >= tailleColonne)) {
-			return false;
-		}
+	public Position placerPion(int colonne, Pion joueur) {
 
 		// On trouve la premiere case vide dans la colonne choisie,
 		// Si la colonne n'est pas pleine, on return true
 		for (int ligne = 0; ligne < tailleLigne; ligne++) {
 			if (plateau[colonne][ligne] == Pion.CASE_VIDE) {
 				plateau[colonne][ligne] = joueur;
-				return true;
+				return new Position(colonne, ligne);
 			}
 		}
-
-		// Si la colonne est pleine, on return false
-		return false;
+		return new Position(8, 0);
 	}
 
 	/**
@@ -210,6 +205,15 @@ public class Plateau {
 
 	public Pion getCase(int ligne, int colonne) {
 		return this.plateau[colonne][ligne];
+	}
+
+	public boolean colonneEstPleine(int colonne) {
+		for (int ligne = 0; ligne < this.tailleLigne; ligne++) {
+			if (plateau[colonne][ligne] == Pion.CASE_VIDE) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

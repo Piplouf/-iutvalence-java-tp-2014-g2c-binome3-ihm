@@ -12,6 +12,8 @@ public class Controleur {
 	private final Joueur[] joueurs;
 	private final Plateau plateau;
 	private final InterfaceAffichage interfacep4;
+	
+	private int joueurCourant;
 
 	public Controleur(String joueur1, String joueur2) {
 		this.joueurs = new Joueur[] { new Joueur(joueur1, Pion.PION_JAUNE),
@@ -22,14 +24,14 @@ public class Controleur {
 
 	public void nouvellePartie() {
 		int vainqueur = -1;
-		int joueurCourant = 0;
+		this.joueurCourant = 0;
 
 		while ((vainqueur == -1) && !plateau.estPlein()) {
 			boolean coupValide = true;
 			do {
 				interfacep4.affichageJoueur(
-						joueurs[joueurCourant].obtenirNom(),
-						joueurs[joueurCourant].obtenirCouleur());
+						joueurs[this.joueurCourant].obtenirNom(),
+						joueurs[this.joueurCourant].obtenirCouleur());
 			} while (!coupValide);
 			if (plateau.estPlein()) {
 				vainqueur = -1;
@@ -37,10 +39,8 @@ public class Controleur {
 			// Si on a 4 pions alignés, il y a un gagnant et cela meme si le
 			// plateau est plein.
 			if (plateau.recherche4PionsAlignes()) {
-				vainqueur = joueurCourant;
+				vainqueur = this.joueurCourant;
 			}
-			// On change de joueur/on change de tour, pour l'itération suivante
-			joueurCourant = (joueurCourant + 1) % 2;
 		}
 
 		interfacep4.partieTerminee();
@@ -52,6 +52,63 @@ public class Controleur {
 		else {
 			interfacep4.nomVainqueur(joueurs[vainqueur].obtenirNom());
 		}
+	}
+	
+	public void partieEnCours(){
+		int vainqueur = -1;
+		this.joueurCourant = 0;
+
+		while ((vainqueur == -1) && !plateau.estPlein()) {
+			if (plateau.estPlein()) {
+				vainqueur = -1;
+			}
+			// Si on a 4 pions alignés, il y a un gagnant et cela meme si le
+			// plateau est plein.
+			if (plateau.recherche4PionsAlignes()) {
+				vainqueur = this.joueurCourant;
+			}
+			// On change de joueur/on change de tour, pour l'itération suivante
+		}
+
+		interfacep4.partieTerminee();
+		interfacep4.afficher();
+
+		if (vainqueur == -1) {
+			interfacep4.matchNul();
+		} 
+		else {
+			interfacep4.nomVainqueur(joueurs[vainqueur].obtenirNom());
+		}
+	}
+	
+	public void changerJoueurCourant(){
+		if(this.joueurCourant == 0)
+			this.joueurCourant = 1;
+		else
+			this.joueurCourant = 0;
+	}
+	
+	public int obtenirJoueurCourant(){
+		return this.joueurCourant;
+	}
+	
+	public Joueur obtenirJoueur(int i){
+		return this.joueurs[i];
+	}
+	
+	public Pion obtenirCouleurJoueur(){
+		return joueurs[this.joueurCourant].obtenirCouleur();
+	}
+	
+	public Joueur obtenirJoueur(){
+		return joueurs[this.joueurCourant];
+	}
+	public Plateau obtenirPlateau(){
+		return this.plateau;
+	}
+	
+	public InterfaceAffichage obtenirInterface(){
+		return this.interfacep4;
 	}
 
 }

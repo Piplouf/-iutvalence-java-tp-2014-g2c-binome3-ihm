@@ -58,13 +58,11 @@ public class InterfaceAffichage {
 
 			// Remet la variable "col" entre 0 et taille-1.
 
-			coupValide = plateau.placerPion(--colonne, couleur);
 			if (!coupValide) {
 				System.out.println("Le coup est non valide !");
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("entrez une valeur numérique entre 1 et 7");
-			coupValide = false;
 		}
 	}
 
