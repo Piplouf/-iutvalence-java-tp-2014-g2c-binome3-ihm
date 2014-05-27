@@ -2,6 +2,8 @@ package tp.java.puissance4.binome4;
 
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+
 /**
  * Class Application
  *
@@ -14,6 +16,7 @@ public class Application {
 		
 		Controleur controleur = new Controleur("","");
 		Fenetre fenetre = new Fenetre(controleur);
+		SwingUtilities.invokeLater(fenetre);
 		}
 }
 

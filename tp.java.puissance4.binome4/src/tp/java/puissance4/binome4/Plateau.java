@@ -19,9 +19,16 @@ public class Plateau {
 	private final int tailleColonne;
 	/** TODO. */
 	private final Pion[][] plateau;
+	
+	/** Rajouter pour l'ihm pour l'affichage de la victoire */
+	private final Position[] positionPionsAlignes;
 
 	public Plateau() {
 		this(Plateau.NOMBRE_COLONNES, Plateau.NOMBRE_LIGNES);
+	}
+	
+	public Pion obtenirCouleurPion(int x,int y){
+		return this.plateau[y][x];
 	}
 
 	/**
@@ -43,6 +50,7 @@ public class Plateau {
 	public Plateau(int tailleColonne, int tailleLigne) {
 		this.tailleColonne = tailleColonne;
 		this.tailleLigne = tailleLigne;
+		this.positionPionsAlignes = new Position[4];
 
 		plateau = new Pion[tailleColonne][tailleLigne];
 		for (int colonne = 0; colonne < tailleColonne; colonne++) {
@@ -60,6 +68,15 @@ public class Plateau {
 		for (int ligne = 0; ligne < tailleLigne; ligne++) {
 			if (plateau[colonne][ligne] == Pion.CASE_VIDE) {
 				plateau[colonne][ligne] = joueur;
+				return new Position(colonne, ligne);
+			}
+		}
+		return new Position(8, 0);
+	}
+	
+	public Position obtenirPositionDUnPion(int colonne, Pion joueur){
+		for (int ligne = 0; ligne < tailleLigne; ligne++) {
+			if (plateau[colonne][ligne] == Pion.CASE_VIDE) {
 				return new Position(colonne, ligne);
 			}
 		}
@@ -112,10 +129,17 @@ public class Plateau {
 				// Si la couleur vient à être modifier, on réinitialise le
 				// compteur
 				couleur = plateau[colonneCourante][ligneCourante];
+				//On prend la position du premier pion qui pourraient form� la ligne de victoire
+				this.positionPionsAlignes[0] = new Position(colonneCourante,ligneCourante);
 				compteurPion = 1;
 			} else {
+				
+				//Rajout pour avoir la position des pions qui pourraient form� la ligne de victoire
+				if(compteurPion < 4 && compteurPion > 0)
+					this.positionPionsAlignes[compteurPion] = new Position(colonneCourante,ligneCourante);
 				// Sinon, si la couleur reste inchagée on l'incrémente
 				compteurPion++;
+
 			}
 
 			// On sort de la boucle seulement quand le compteur est égal à 4
@@ -214,6 +238,10 @@ public class Plateau {
 			}
 		}
 		return true;
+	}
+	
+	public Position[] obtenirPositionsPionsAlignes(){
+		return this.positionPionsAlignes;
 	}
 
 }

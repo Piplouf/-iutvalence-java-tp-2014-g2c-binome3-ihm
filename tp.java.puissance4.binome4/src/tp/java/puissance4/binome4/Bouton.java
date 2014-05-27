@@ -5,17 +5,21 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
-public class Bouton extends JButton implements ActionListener {
+public class Bouton extends JButton implements ActionListener{
 
+	/** Numero du bouton pour la colonne*/
 	private int numero;
 
 	private Controleur controleur;
 
 	private Fenetre fen;
 
+	/** Créer un bouton colonne */
 	public Bouton() {
 		this.setPreferredSize(new Dimension(50, 50));
 		this.numero = 0;
@@ -41,18 +45,6 @@ public class Bouton extends JButton implements ActionListener {
 		return this.controleur;
 	}
 
-	public void afficherPion() {
-		if (this.controleur.obtenirCouleurJoueur() == Pion.PION_JAUNE) {
-			this.setBackground(Color.YELLOW);
-			return;
-		}
-
-		if (this.controleur.obtenirCouleurJoueur() == Pion.PION_ROUGE) {
-			this.setBackground(Color.RED);
-			return;
-		}
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -64,12 +56,13 @@ public class Bouton extends JButton implements ActionListener {
 					numero - 1))
 				obtenirBouton().setEnabled(false);
 			this.changerCouleur(pos);
-			if (this.controleur.obtenirPlateau().estPlein()){
+			if (this.controleur.obtenirPlateau().estPlein()) {
 				this.fen.modifierTexte("Partie terminée aucun gagnant !");
 				this.fen.partieGagnee();
 			}
 			if (this.controleur.obtenirPlateau().recherche4PionsAlignes()) {
-				this.fen.modifierTexte(this.controleur.obtenirJoueur().obtenirNom()+" remporte la partie");
+				this.fen.modifierTexte(this.controleur.obtenirJoueur()
+						.obtenirNom() + " remporte la partie");
 				this.fen.partieGagnee();
 			} else {
 				this.controleur.changerJoueurCourant();
@@ -78,8 +71,9 @@ public class Bouton extends JButton implements ActionListener {
 		}
 	}
 
+	/** Change la couleur du bouton selon le joueur courant */
 	public void changerCouleur(Position pos) {
-		if (obtenirControleur().obtenirJoueurCourant() == 1) {
+		if (this.controleur.obtenirJoueurCourant() == 1) {
 			fen.modifierCaseGrille(pos, Color.RED);
 		} else {
 			fen.modifierCaseGrille(pos, Color.YELLOW);

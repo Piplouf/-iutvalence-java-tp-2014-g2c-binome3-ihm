@@ -16,5 +16,9 @@ public class Position {
 	public int retournerY(){
 		return this.y;
 	}
+	
+	public void modifierX(int x){
+		this.x = x;
+	}
 
 }
