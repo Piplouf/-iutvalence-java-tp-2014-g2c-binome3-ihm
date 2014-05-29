@@ -1,7 +1,5 @@
 package tp.java.puissance4.binome4;
 
-import java.util.Scanner;
-
 import javax.swing.SwingUtilities;
 
 /**

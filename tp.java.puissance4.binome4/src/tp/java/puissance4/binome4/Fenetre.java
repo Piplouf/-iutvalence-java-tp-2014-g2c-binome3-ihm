@@ -6,9 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,9 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /** Créer une fenêtre avec deux panels */
-public class Fenetre extends JFrame implements ActionListener, Runnable {
-
-	/** */
+public class Fenetre extends JFrame implements ActionListener, Runnable{
+	
 	private static final long serialVersionUID = 1L;
 
 	/** Prend la partie en parametre */
@@ -126,7 +122,7 @@ public class Fenetre extends JFrame implements ActionListener, Runnable {
 		this.zoneDeTexte = new JLabel(this.controleur.obtenirJoueur()
 				.obtenirNom());
 		this.image = new JLabel();
-		this.image.setIcon(new ImageIcon("src/img/pion_jaune_adapt.gif"));
+		this.image.setIcon(new ImageIcon(Application.class.getResource("/img/pion_jaune_adapt.gif")));
 
 		zoneDeTexte.setPreferredSize(new Dimension(200, 50));
 		image.setPreferredSize(new Dimension(50, 50));
@@ -172,9 +168,9 @@ public class Fenetre extends JFrame implements ActionListener, Runnable {
 	public void refresh() {
 		this.zoneDeTexte.setText(this.controleur.obtenirJoueur().obtenirNom());
 		if (this.controleur.obtenirJoueurCourant() == 0)
-			this.image.setIcon(new ImageIcon("src/img/pion_jaune_adapt.gif"));
+			this.image.setIcon(new ImageIcon(Application.class.getResource("/img/pion_jaune_adapt.gif")));
 		else
-			this.image.setIcon(new ImageIcon("src/img/pion_rouge_adapt.gif"));
+			this.image.setIcon(new ImageIcon(Application.class.getResource("/img/pion_rouge_adapt.gif")));
 	}
 
 	/** Bloque le jeu, et active la possibilité de rejouer car un jouer a gagne */
@@ -199,9 +195,9 @@ public class Fenetre extends JFrame implements ActionListener, Runnable {
 		int x = Plateau.NOMBRE_LIGNES - 1 - pos.retournerY();
 		
 		if(this.controleur.obtenirJoueurCourant() == 0)
-			this.grille[x][y].setIcon(new ImageIcon("src/img/pion_jaune_adapt_2.gif"));
+			this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_jaune_adapt_2.gif")));
 		else
-			this.grille[x][y].setIcon(new ImageIcon("src/img/pion_rouge_adapt_2.gif"));
+			this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_rouge_adapt_2.gif")));
 	}
 
 	/** Affiche les cases qui sont remplies */
@@ -209,11 +205,9 @@ public class Fenetre extends JFrame implements ActionListener, Runnable {
 		int y = pos.retournerX();
 		int x = Plateau.NOMBRE_LIGNES - 1 - pos.retournerY();
 		if (couleur == Color.RED)
-			this.grille[x][y].setIcon(new ImageIcon(
-					"src/img/pion_rouge_adapt.gif"));
+			this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_rouge_adapt.gif")));
 		else
-			this.grille[x][y].setIcon(new ImageIcon(
-					"src/img/pion_jaune_adapt.gif"));
+			this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_jaune_adapt.gif")));
 	}
 
 	/** Affiche les cases que l'on va remplir si l'on joue dans cette colonne*/
@@ -224,15 +218,12 @@ public class Fenetre extends JFrame implements ActionListener, Runnable {
 		if (test) {
 
 			if (couleur == Color.RED) {
-				this.grille[x][y].setIcon(new ImageIcon(
-						"src/img/pion_rouge_adapt_1.gif"));
+				this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_rouge_adapt_1.gif")));
 			} else {
-				this.grille[x][y].setIcon(new ImageIcon(
-						"src/img/pion_jaune_adapt_1.gif"));
+				this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_jaune_adapt_1.gif")));
 			}
 		} else
-			this.grille[x][y].setIcon(new ImageIcon(
-					"src/img/pion_blanc_adapt.gif"));
+			this.grille[x][y].setIcon(new ImageIcon(Application.class.getResource("/img/pion_blanc_adapt.gif")));
 	}
 	
 	

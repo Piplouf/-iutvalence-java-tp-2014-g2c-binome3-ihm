@@ -13,6 +13,11 @@ import javax.swing.JButton;
 public class BoutonGrille extends JButton implements ActionListener,
 		MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3836374623950536436L;
+
 	/** Position du bouton sur la grille */
 	private Position position;
 
@@ -33,7 +38,7 @@ public class BoutonGrille extends JButton implements ActionListener,
 	/** Affiche le bouton sur l'ihm */
 	private void initGUI() {
 		this.setBorderPainted(false);
-		this.setIcon(new ImageIcon("src/img/pion_blanc_adapt.gif"));
+		this.setIcon(new ImageIcon(Application.class.getResource("/img/pion_blanc_adapt.gif")));
 		this.setContentAreaFilled(false);
 		this.addActionListener(this);
 		this.addMouseListener(this);

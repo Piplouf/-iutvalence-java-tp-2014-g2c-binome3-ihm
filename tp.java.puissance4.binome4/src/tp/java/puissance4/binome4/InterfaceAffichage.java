@@ -1,7 +1,6 @@
 package tp.java.puissance4.binome4;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * Class InterfaceP4
@@ -51,10 +50,7 @@ public class InterfaceAffichage {
 		System.out
 				.printf("Joueur %s, entrez le numéro de colonne souhaité (entre 1 et %d) : %n",
 						nom, plateau.getTailleColonne());
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
 		try {
-			int colonne = scanner.nextInt();
 
 			// Remet la variable "col" entre 0 et taille-1.
 

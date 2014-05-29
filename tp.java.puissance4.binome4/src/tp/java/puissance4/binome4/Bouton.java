@@ -1,16 +1,17 @@
 package tp.java.puissance4.binome4;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
 
 public class Bouton extends JButton implements ActionListener{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2747404634307939803L;
 
 	/** Numero du bouton pour la colonne*/
 	private int numero;
